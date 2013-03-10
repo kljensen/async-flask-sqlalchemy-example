@@ -61,20 +61,23 @@ Then, in a separate shell, run the client like
 
 You should see output like
 
-Sending 5 requests for http://localhost:8000/sleep/python/...
-	@  5.02s got response [200]
-	@ 10.02s got response [200]
-	@ 15.03s got response [200]
-	@ 20.04s got response [200]
-	@ 25.05s got response [200]
-	= 25.06s TOTAL
-Sending 5 requests for http://localhost:8000/sleep/postgres/...
-	@  5.01s got response [200]
-	@ 10.02s got response [200]
-	@ 15.03s got response [200]
-	@ 20.04s got response [200]
-	@ 25.05s got response [200]
-	= 25.06s TOTAL
+	Sending 5 requests for http://localhost:8000/sleep/python/...
+		@  5.05s got response [200]
+		@ 10.05s got response [200]
+		@ 15.07s got response [200]
+		@ 20.07s got response [200]
+		@ 25.08s got response [200]
+		= 25.09s TOTAL
+	Sending 5 requests for http://localhost:8000/sleep/postgres/...
+		@  5.02s got response [200]
+		@ 10.02s got response [200]
+		@ 15.03s got response [200]
+		@ 20.04s got response [200]
+		@ 25.05s got response [200]
+		= 25.05s TOTAL
+	------------------------------------------
+	SUM TOTAL = 50.15
+
 
 ### Gunicorn non-blocking with SQLAlchemy blocking
 
@@ -86,7 +89,7 @@ and run the client again.   You should see output like
 
 	Sending 5 requests for http://localhost:8000/sleep/python/...
 		@  5.05s got response [200]
-		@  5.05s got response [200]
+		@  5.06s got response [200]
 		@  5.06s got response [200]
 		@  5.06s got response [200]
 		@  5.07s got response [200]
@@ -94,11 +97,14 @@ and run the client again.   You should see output like
 	Sending 5 requests for http://localhost:8000/sleep/postgres/...
 		@  5.01s got response [200]
 		@ 10.02s got response [200]
-		@ 15.03s got response [200]
-		@ 20.04s got response [200]
-		@ 25.05s got response [200]
-		= 25.05s TOTAL
- 
+		@ 15.04s got response [200]
+		@ 20.05s got response [200]
+		@ 25.06s got response [200]
+		= 25.06s TOTAL
+	------------------------------------------
+	SUM TOTAL = 30.14
+	 
+
 ### Gunicorn non-blocking with SQLAlchemy non-blocking
 
 Run the server like
@@ -108,24 +114,26 @@ Run the server like
 and run the client again.   You should see output like
 
 	Sending 5 requests for http://localhost:8000/sleep/python/...
+		@  5.03s got response [200]
+		@  5.03s got response [200]
+		@  5.03s got response [200]
 		@  5.04s got response [200]
-		@  5.05s got response [200]
-		@  5.06s got response [200]
-		@  5.07s got response [200]
-		@  5.08s got response [200]
-		=  5.08s TOTAL
+		@  5.03s got response [200]
+		=  5.04s TOTAL
 	Sending 5 requests for http://localhost:8000/sleep/postgres/...
 		@  5.02s got response [200]
 		@  5.03s got response [200]
 		@  5.03s got response [200]
 		@  5.03s got response [200]
 		@  5.03s got response [200]
-		=  5.04s TOTAL
+		=  5.03s TOTAL
+	------------------------------------------
+	SUM TOTAL = 10.07
 
 
 ## Results
 
-Shizzle works fine.  Your mileage may vary in production.  
+Stuff gets faster, shizzle works fine.  Your mileage may vary in production.  
 
 
 ## License (MIT)

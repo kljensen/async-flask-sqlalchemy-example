@@ -35,7 +35,10 @@ if __name__ == '__main__':
     num_tries = 5
 
     # Fetch the URL that blocks with a `time.sleep`
-    time_fetch_urls("http://localhost:8000/sleep/python/", num_tries)
+    t0 = time_fetch_urls("http://localhost:8000/sleep/python/", num_tries)
 
     # Fetch the URL that blocks with a `pg_sleep`
-    time_fetch_urls("http://localhost:8000/sleep/postgres/", num_tries)
+    t1 = time_fetch_urls("http://localhost:8000/sleep/postgres/", num_tries)
+
+    print("------------------------------------------")
+    print("SUM TOTAL = %.2f" % (t0 + t1))
