@@ -61,7 +61,7 @@ Then, in a separate shell, run the client like
 
 You should see output like
 
-	Sending 5 requests for http://localhost:8000/sleep/python/...
+Sending 5 requests for http://localhost:8000/sleep/python/...
 	@  5.02s got response [200]
 	@ 10.02s got response [200]
 	@ 15.03s got response [200]
