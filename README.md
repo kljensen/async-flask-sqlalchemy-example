@@ -27,7 +27,7 @@ can make the Postgres sleep non-blocking.
 
 Clone the repo:
 
-	git clone ...
+	git clone https://github.com/kljensen/fsppgg-example
 
 Install the requirements
 
@@ -45,9 +45,9 @@ Create the required tables in this database
 ## Running the code
 
 You can test three situations with this code:
- * Gunicorn blocking with SQLAlchemy blocking;
- * Gunicorn non-blocking with SQLAlchemy blocking; and,
- * Gunicorn non-blocking with SQLAlchemy non-blocking.
+ * Gunicorn blocking with SQLAlchemy/Psycopg2 blocking;
+ * Gunicorn non-blocking with SQLAlchemy/Psycopg2 blocking; and,
+ * Gunicorn non-blocking with SQLAlchemy/Psycopg2 non-blocking.
 
  ### Gunicorn blocking with SQLAlchemy blocking
 
