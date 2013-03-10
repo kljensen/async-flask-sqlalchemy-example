@@ -1,4 +1,4 @@
-Async, Non-blocking Flask & Sqlalchemy Example
+Async, non-blocking Flask & SQLAlchemy example
 ==============================================
 
 ## Overview
