@@ -1,0 +1,4 @@
+Flask-SQLAlchemy==0.16
+psycopg2==2.4.6
+gevent==0.13.8
+gunicorn==0.17.2
