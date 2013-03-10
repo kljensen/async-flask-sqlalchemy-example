@@ -1,5 +1,5 @@
-Flask, SQLAlchemy, Psygopg2, Postgresql, Gevent & Gunicorn Example
-==================================================================
+Async, Non-blocking Flask & Sqlalchemy Example
+==============================================
 
 ## Overview
 
@@ -7,15 +7,15 @@ This code shows how to use the following menagerie of compontents
 together in a completely non-blocking manner:
 
 * [Flask](http://flask.pocoo.org/), for the web application framework;
-* [SQLAlchemy](http://www.sqlalchemy.org/), for the object relational mapper;
+* [SQLAlchemy](http://www.sqlalchemy.org/), for the object relational mapper (via [Flask-SQLAlchemy](https://github.com/mitsuhiko/flask-sqlalchemy));
 * [Postgresql](http://www.postgresql.org/), for the database;
 * [Psycopg2](http://initd.org/psycopg/), for the SQLAlchemy-Postgresql adapter;
 * [Gunicorn](http://gunicorn.org/), for the WSGI server; and,
 * [Gevent](http://www.gevent.org/), for the networking library.
 
 The file `server.py` defines a small Flask application that has
-two routes: one that triggers a "sleep" in Python and one that
-triggers a sleep in Postgres.  Both of these sleeps are normally
+two routes: one that triggers a `time.sleep(5)` in Python and one that
+triggers a `pg_sleep(5)` in Postgres.  Both of these sleeps are normally
 blocking operations.  By running the server using the Gevent
 worker for Gunicorn, we can make the Python sleep non-blocking.
 By configuring Psycopg2's co-routine support (via
@@ -27,7 +27,7 @@ can make the Postgres sleep non-blocking.
 
 Clone the repo:
 
-	git clone https://github.com/kljensen/fsppgg-example
+	git clone https://github.com/kljensen/async-flask-sqlalchemy-example
 
 Install the requirements
 
@@ -76,7 +76,6 @@ You should see output like
 		@ 25.05s got response [200]
 		= 25.05s TOTAL
 	------------------------------------------
-	SUM TOTAL = 50.15
 	SUM TOTAL = 50.15s
 
 
