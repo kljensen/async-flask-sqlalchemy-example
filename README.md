@@ -49,32 +49,32 @@ You can test three situations with this code:
  * Gunicorn non-blocking with SQLAlchemy/Psycopg2 blocking; and,
  * Gunicorn non-blocking with SQLAlchemy/Psycopg2 non-blocking.
 
- ### Gunicorn blocking with SQLAlchemy blocking
+### Gunicorn blocking with SQLAlchemy blocking
 
- Run the server (which is the Flask application) like
+Run the server (which is the Flask application) like
 
- 	gunicorn server:app
+	gunicorn server:app
 
- Then, in a separate shell, run the client like
+Then, in a separate shell, run the client like
 
- 	python ./client.py
+	python ./client.py
 
- You should see output like
+You should see output like
 
- 	Sending 5 requests for http://localhost:8000/sleep/python/...
-		@  5.02s got response [200]
-		@ 10.02s got response [200]
-		@ 15.03s got response [200]
-		@ 20.04s got response [200]
-		@ 25.05s got response [200]
-		= 25.06s TOTAL
-	Sending 5 requests for http://localhost:8000/sleep/postgres/...
-		@  5.01s got response [200]
-		@ 10.02s got response [200]
-		@ 15.03s got response [200]
-		@ 20.04s got response [200]
-		@ 25.05s got response [200]
-		= 25.06s TOTAL
+	Sending 5 requests for http://localhost:8000/sleep/python/...
+	@  5.02s got response [200]
+	@ 10.02s got response [200]
+	@ 15.03s got response [200]
+	@ 20.04s got response [200]
+	@ 25.05s got response [200]
+	= 25.06s TOTAL
+Sending 5 requests for http://localhost:8000/sleep/postgres/...
+	@  5.01s got response [200]
+	@ 10.02s got response [200]
+	@ 15.03s got response [200]
+	@ 20.04s got response [200]
+	@ 25.05s got response [200]
+	= 25.06s TOTAL
 
 ### Gunicorn non-blocking with SQLAlchemy blocking
 
