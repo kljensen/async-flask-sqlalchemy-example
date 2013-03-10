@@ -77,6 +77,7 @@ You should see output like
 		= 25.05s TOTAL
 	------------------------------------------
 	SUM TOTAL = 50.15
+	SUM TOTAL = 50.15s
 
 
 ### Gunicorn non-blocking with SQLAlchemy blocking
@@ -102,7 +103,7 @@ and run the client again.   You should see output like
 		@ 25.06s got response [200]
 		= 25.06s TOTAL
 	------------------------------------------
-	SUM TOTAL = 30.14
+	SUM TOTAL = 30.14s
 	 
 
 ### Gunicorn non-blocking with SQLAlchemy non-blocking
@@ -128,7 +129,7 @@ and run the client again.   You should see output like
 		@  5.03s got response [200]
 		=  5.03s TOTAL
 	------------------------------------------
-	SUM TOTAL = 10.07
+	SUM TOTAL = 10.07s
 
 
 ## Results

@@ -41,4 +41,4 @@ if __name__ == '__main__':
     t1 = time_fetch_urls("http://localhost:8000/sleep/postgres/", num_tries)
 
     print("------------------------------------------")
-    print("SUM TOTAL = %.2f" % (t0 + t1))
+    print("SUM TOTAL = %.2fs" % (t0 + t1))
