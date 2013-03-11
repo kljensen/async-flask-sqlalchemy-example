@@ -131,14 +131,44 @@ and run the client again.   You should see output like
 	SUM TOTAL = 10.07s
 
 
-## Warnings
+## Warnings (I lied, it actually does block)
 
 If you increase the number of requests made in `client.py` you'll notice
-that SQLAlchemy/Psycopg2 start to block again.  This is due to the connection
-pooling.  This can be fixed by either 1) turning off connection pooling by using
-the [SQLAlchemy NullPool](http://docs.sqlalchemy.org/en/latest/core/pooling.html#sqlalchemy.pool.NullPool);
-or 2) by using [the connection pool](https://code.google.com/p/gevent/source/browse/examples/psycopg2_pool.py?name=1.0b4) that's in the 1.0+ version of 
-Gevent.  I'll figure out which is best and update this code.
+that SQLAlchemy/Psycopg2 start to block again.  Try, e.g.
+
+	python ./client.py 100
+
+when running the server in fully non-blocking mode.  You'll notice the `/sleep/postgres/` 
+responses come back in sets of 15. (Well, probably 15, you could have your
+environment configured differently than I.)  This because SQLAlchemy uses
+[connection pooling](http://docs.sqlalchemy.org/en/latest/core/pooling.html)
+and, by default, the [QueuePool](http://docs.sqlalchemy.org/en/latest/core/pooling.html#sqlalchemy.pool.QueuePool)
+which limits the number of connections to some configuration parameter
+`pool_size` plus a possible "burst" of `max_overflow`.  (If you're using 
+the [Flask-SQLAlchemy](https://github.com/mitsuhiko/flask-sqlalchemy)
+extension, `pool_size` is set by your Flask app's configuration variable
+`SQLALCHEMY_POOL_SIZE`.  It is 5 by default.  `max_overflow` is 10 by
+default and cannot be specified by a Flask configuration variable, you need
+to set it on the pool yourself.) Once you get over
+`pool_size + max_overflow` needed connections, the SQLAlchemy operations
+will block.  You can get around this by disabling pooling via SQLAlchemy's
+[SQLAlchemy's NullPool](http://docs.sqlalchemy.org/en/latest/core/pooling.html#sqlalchemy.pool.NullPool);
+however, you probably don't want to do that for two reasons.  
+
+1.  Postgresql has a configuration parameter `max_connections` that, drumroll, limits the
+number of connections.  If `pool_size + max_overflow` exceeds `max_connections`,
+any new connection requests will be declined by your Postgresql instance.
+Each unique connection will cause Postgresql to use a non-trival amount of
+RAM.  Therefore, unless you have a ton of RAM, you should keep `max_connections`
+to some reasonable value.
+
+2.  If you used the `NullPool`, you'd create a new TCP connection every
+time you use SQLAlchemy to talk to the database.  Thus, you'll encur an
+overhead  associated with the TCP handshake, etc.
+
+So, in effect, the concurrency for Postgresql operations is always
+limited by `max_connections` and how 
+
 
 ## Results
 
