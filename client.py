@@ -9,11 +9,14 @@ def fetch_url(url):
     """ Fetch a URL and return the total amount of time required.
     """
     t0 = time.time()
-    resp = urllib2.urlopen(url)
-    if resp.code != 200:
-        raise Exception("Dude, failed to fetch %s" % (url))
+    try:
+        resp = urllib2.urlopen(url)
+        resp_code = resp.code
+    except urllib2.HTTPError, e:
+        resp_code = e.code
+
     t1 = time.time()
-    print("\t@ %5.2fs got response [%d]" % (t1 - t0, resp.code))
+    print("\t@ %5.2fs got response [%d]" % (t1 - t0, resp_code))
     return t1 - t0
 
 
