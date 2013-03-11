@@ -167,7 +167,7 @@ time you use SQLAlchemy to talk to the database.  Thus, you'll encur an
 overhead  associated with the TCP handshake, etc.
 
 So, in effect, the concurrency for Postgresql operations is always
-limited by `max_connections` and how 
+limited by `max_connections` and how much RAM you have.
 
 
 ## Results
