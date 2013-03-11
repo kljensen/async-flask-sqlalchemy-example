@@ -27,7 +27,7 @@ can make the Postgres sleep non-blocking.
 
 Clone the repo:
 
-	git clone https://github.com/kljensen/async-flask-sqlalchemy-example
+	git clone https://github.com/kljensen/async-flask-sqlalchemy-example.git
 
 Install the requirements
 
