@@ -131,6 +131,15 @@ and run the client again.   You should see output like
 	SUM TOTAL = 10.07s
 
 
+## Warnings
+
+If you increase the number of requests made in `client.py` you'll notice
+that SQLAlchemy/Psycopg2 start to block again.  This is due to the connection
+pooling.  This can be fixed by either 1) turning off connection pooling by using
+the [SQLAlchemy NullPool](http://docs.sqlalchemy.org/en/latest/core/pooling.html#sqlalchemy.pool.NullPool);
+or 2) by using [the connection pool](https://code.google.com/p/gevent/source/browse/examples/psycopg2_pool.py?name=1.0b4) that's in the 1.0+ version of 
+Gevent.  I'll figure out which is best and update this code.
+
 ## Results
 
 Stuff gets faster, shizzle works fine.  Your mileage may vary in production.  
