@@ -1,3 +1,4 @@
+import sys
 import gevent
 import time
 from gevent import monkey
@@ -35,13 +36,16 @@ def time_fetch_urls(url, num_jobs):
 
 if __name__ == '__main__':
 
-    num_tries = 5
+    try:
+        num_requests = int(sys.argv[1])
+    except IndexError:
+        num_requests = 5
 
     # Fetch the URL that blocks with a `time.sleep`
-    t0 = time_fetch_urls("http://localhost:8000/sleep/python/", num_tries)
+    t0 = time_fetch_urls("http://localhost:8000/sleep/python/", num_requests)
 
     # Fetch the URL that blocks with a `pg_sleep`
-    t1 = time_fetch_urls("http://localhost:8000/sleep/postgres/", num_tries)
+    t1 = time_fetch_urls("http://localhost:8000/sleep/postgres/", num_requests)
 
     print("------------------------------------------")
     print("SUM TOTAL = %.2fs" % (t0 + t1))
