@@ -59,10 +59,7 @@ def sleep_postgres():
         gevent-friendly.
     """
     db.session.execute('SELECT pg_sleep(5)')
-    todos = Todo.query.all()
-    return jsonify(
-        json_list=[todo.as_dict() for todo in todos]
-    )
+    return Todo.jsonify_all()
 
 
 @app.route('/sleep/python/')
@@ -71,10 +68,7 @@ def sleep_python():
         gunicorn is using the gevent worker class.
     """
     time.sleep(5)
-    todos = Todo.query.all()
-    return jsonify(
-        json_list=[todo.as_dict() for todo in todos]
-    )
+    return Todo.jsonify_all()
 
 
 # Create the tables and populate it with some dummy data
