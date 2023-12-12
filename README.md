@@ -1,6 +1,9 @@
 Async, non-blocking Flask & SQLAlchemy example
 ==============================================
 
+> [!WARNING]  
+> This code is really old at this point. Use it for edification but not production!
+
 ## Overview
 
 This code shows how to use the following menagerie of compontents
